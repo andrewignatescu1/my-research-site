@@ -1,6 +1,5 @@
 /.quarto/
 **/*.quarto_ipynb
 .Rproj.user
-docs/
 data/.RDataTmp
 .RDataTmp
