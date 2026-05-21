@@ -1,0 +1,141 @@
+---
+title: "Hantavirus Data Analysis"
+author: "Andrew Ignatescu"
+format: html
+editor: visual
+---
+
+## Introduction
+
+Hantavirus is a rare but deadly virus transmitted to humans through contact with infected rodents. Since its first major outbreak in 1993 in the Four Corners region of the American Southwest, the CDC has tracked cases across the United States. This research explores where and when Hantavirus outbreaks have occurred, using CDC data spanning from before 1993 to 2023
+
+## Cases Per Year
+
+Hantavirus is a rare but deadly disease transmitted through contact with infected rodents. This chart shows the number of confirmed cases reported in the United States from before 1993 to 2023. The spike in 1993 marks the first major outbreak in the Four Corners region of the American Southwest.
+
+```{r}
+#| message: false
+#| warning: false
+library(tidyverse)
+library(ggplot2)
+library(ggthemes)
+library(stringr)
+library(maps)
+library(lubridate)
+
+hantavirus_data <- read.csv("data/HantaVirusTableData.csv", skip = 1)
+
+ggplot(hantavirus_data, aes(x = factor(
+  ifelse(grepl("Before", IllnessOnsetDate),
+         "Before 1993",
+         str_extract(IllnessOnsetDate, "\\d{4}")),
+  levels = c("Before 1993", as.character(1993:2024))))) +
+  geom_bar(fill = "steelblue") +
+  labs(title = "Hantavirus Cases by Year From Before 1993 to 2023",
+       x = "Year", y = "Number of Cases") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+## Cases Per State
+
+This map shows the geographic distribution of Hantavirus cases across the United States. Western states, particularly New Mexico, Colorado, and California - account for the majority of reported cases, reflecting the habitat range of the deer mouse, the primary carrier of the virus.
+
+```{r}
+#| message: false
+#| warning: false
+state_fips <- data.frame(
+  StateFIPS = c("04","06","08","12","16","17","18","19","20",
+                "22","25","26","27","30","31","32","35","36",
+                "37","38","40","41","42","46","48","49","50",
+                "53","55","56"),
+  state = c("arizona","california","colorado","florida","idaho",
+            "illinois","indiana","iowa","kansas","louisiana",
+            "massachusetts","michigan","minnesota","montana",
+            "nebraska","nevada","new mexico","new york",
+            "north carolina","north dakota","oklahoma","oregon",
+            "pennsylvania","south dakota","texas","utah","vermont",
+            "washington","wisconsin","wyoming")
+)
+
+state_counts <- hantavirus_data %>%
+  mutate(StateFIPS = sprintf("%02d", as.integer(StateFIPS))) %>%
+  count(StateFIPS) %>%
+  left_join(state_fips, by = "StateFIPS")
+
+us_map <- map_data("state")
+map_merged <- left_join(us_map, state_counts, by = c("region" = "state"))
+
+ggplot(map_merged, aes(x = long, y = lat, group = group, fill = n)) +
+  geom_polygon(color = "white") +
+  scale_fill_gradient(low = "lightblue", high = "darkred", 
+                      na.value = "grey90", name = "Cases") +
+  labs(title = "Hantavirus Cases by State (1993-2023)") +
+  theme_void()
+```
+
+## Cases Over Time
+
+This line chart shows the trend in Hantavirus cases by year, excluding pre-1993 cases which lack specific dates. It reveals how case counts have fluctuated over the decades, with notable spikes in certain years following favorable rodent population conditions.
+
+```{r}
+#| message: false
+#| warning: false
+
+# Filter out "Before 1993" rows and remove rows with no date
+cases_by_year <- hantavirus_data %>%
+  filter(!grepl("Before", IllnessOnsetDate), !is.na(IllnessOnsetDate)) %>%
+  # Extract the 4-digit year from strings like "Jul-1993"
+  mutate(Year = as.integer(str_extract(IllnessOnsetDate, "\\d{4}"))) %>%
+  # Drop any rows where year extraction failed
+  filter(!is.na(Year)) %>%
+  count(Year, name = "Cases")
+
+# Build the line chart
+ggplot(cases_by_year, aes(x = Year, y = Cases)) +
+  geom_line(color = "red", linewidth = 1.2) +
+  geom_point(color = "red", size = 3) +
+  scale_x_continuous(breaks = seq(min(cases_by_year$Year),
+                                   max(cases_by_year$Year), by = 2)) +
+  labs(title = "Hantavirus Cases Over Time (1993–2023)",
+       subtitle = "Pre-1993 cases excluded due to undated records",
+       x = "Year", y = "Number of Cases") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    # Rotate x-axis labels so they don't overlap
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    panel.grid.minor = element_blank()
+  )
+```
+
+## Top 10 Sates by Case Count
+
+This table shows the ten states with the highest number of reported Hantavirus cases. Western states dominate the list,reflecting the geographic range of the deer mouse, the primary carrier of the virus.
+
+```{r}
+#| message: false
+#| warning: false
+library(knitr)
+
+
+top10_states <- hantavirus_data %>%
+  # Convert FIPS code to 2-digit string to match lookup table
+  mutate(StateFIPS = sprintf("%02d", as.integer(StateFIPS))) %>%
+  # Join with the state names lookup table already defined above
+  left_join(state_fips, by = "StateFIPS") %>%
+  # Remove rows with no matching state name
+  filter(!is.na(state)) %>%
+
+  count(state, name = "Cases") %>%
+  # Sort highest to lowest and keep top 10
+  arrange(desc(Cases)) %>%
+  slice(1:10) %>%
+
+  mutate(state = str_to_title(state)) %>%
+  rename(State = state)
+
+
+kable(top10_states, caption = "Top 10 States by Hantavirus Case Count (1993–2023)")
+
+```

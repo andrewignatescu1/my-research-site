@@ -1,0 +1,14 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Hantavirus Data Analysis"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Hantavirus
+
+format:
+  html:
+    theme: cosmo
