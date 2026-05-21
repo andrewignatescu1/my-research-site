@@ -6,9 +6,9 @@ website:
   title: "Hantavirus Data Analysis"
   navbar:
     left:
-      - href: index.qmd
+      - href: index.html
         text: Home
-      - href: Hantavirus_Research.qmd
+      - href: Hantavirus_Research.html
         text: Hantavirus
 
 format:
