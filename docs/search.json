@@ -1,51 +1,121 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome!",
+    "objectID": "resources.html",
+    "href": "resources.html",
+    "title": "Resources",
     "section": "",
-    "text": "Welcome to my Hantavirus research site. This project analyzes CDC data on Hantavirus cases across the United States from before 1993 to 2023."
+    "text": "CDC Hantavirus Case Data Centers for Disease Control and Prevention. (2024). Hantavirus Cases in the United States. Retrieved from: https://www.cdc.gov/hantavirus/data-research/cases/index.html"
+  },
+  {
+    "objectID": "resources.html#data-sources",
+    "href": "resources.html#data-sources",
+    "title": "Resources",
+    "section": "",
+    "text": "CDC Hantavirus Case Data Centers for Disease Control and Prevention. (2024). Hantavirus Cases in the United States. Retrieved from: https://www.cdc.gov/hantavirus/data-research/cases/index.html"
+  },
+  {
+    "objectID": "resources.html#about-hantavirus",
+    "href": "resources.html#about-hantavirus",
+    "title": "Resources",
+    "section": "About Hantavirus",
+    "text": "About Hantavirus\n\nCDC Hantavirus Overview Centers for Disease Control and Prevention. (2024). Hantavirus. Retrieved from: https://www.cdc.gov/hantavirus"
+  },
+  {
+    "objectID": "resources.html#code-and-analysis-references",
+    "href": "resources.html#code-and-analysis-references",
+    "title": "Resources",
+    "section": "Code and Analysis References",
+    "text": "Code and Analysis References\n\nFunctional Data Analysis with R Crainiceanu, C.M., Goldsmith, J., Leroux, A., and Cui, E. (2024). Functional Data Analysis with R. Chapman and Hall/CRC Press. https://www.taylorfrancis.com/books/mono/10.1201/9781003278726/functional-data-analysis-ciprian-crainiceanu-jeff-goldsmith-andrew-leroux-erjia-cui"
+  },
+  {
+    "objectID": "resources.html#r-packages-used",
+    "href": "resources.html#r-packages-used",
+    "title": "Resources",
+    "section": "R Packages Used",
+    "text": "R Packages Used\n\nggplot2: https://ggplot2.tidyverse.org\ntidyr: https://tidyr.tidyverse.org\nstringr: https://stringr.tidyverse.org\ndplyr: https://dplyr.tidyverse.org"
+  },
+  {
+    "objectID": "resources.html#further-reading",
+    "href": "resources.html#further-reading",
+    "title": "Resources",
+    "section": "Further Reading",
+    "text": "Further Reading\n\nCDC Hantavirus Transmission: https://www.cdc.gov/hantavirus/transmission\nProMED Hantavirus Updates: https://promedmail.org"
   },
   {
     "objectID": "Hantavirus_Research.html",
     "href": "Hantavirus_Research.html",
     "title": "Hantavirus Data Analysis",
     "section": "",
-    "text": "Hantavirus is a rare but deadly virus transmitted to humans through contact with infected rodents. Since its first major outbreak in 1993 in the Four Corners region of the American Southwest, the CDC has tracked cases across the United States. This research explores where and when Hantavirus outbreaks have occurred, using CDC data spanning from before 1993 to 2023"
+    "text": "Hantavirus is a rare but deadly virus transmitted to humans through contact with infected rodents. Since its first major outbreak in 1993 in the Four Corners region of the American Southwest, the CDC has tracked cases across the United States. This research explores where and when Hantavirus outbreaks have occurred, using CDC data spanning from before 1993 to 2023"
   },
   {
     "objectID": "Hantavirus_Research.html#introduction",
     "href": "Hantavirus_Research.html#introduction",
     "title": "Hantavirus Data Analysis",
     "section": "",
-    "text": "Hantavirus is a rare but deadly virus transmitted to humans through contact with infected rodents. Since its first major outbreak in 1993 in the Four Corners region of the American Southwest, the CDC has tracked cases across the United States. This research explores where and when Hantavirus outbreaks have occurred, using CDC data spanning from before 1993 to 2023"
+    "text": "Hantavirus is a rare but deadly virus transmitted to humans through contact with infected rodents. Since its first major outbreak in 1993 in the Four Corners region of the American Southwest, the CDC has tracked cases across the United States. This research explores where and when Hantavirus outbreaks have occurred, using CDC data spanning from before 1993 to 2023"
+  },
+  {
+    "objectID": "Hantavirus_Research.html#about-the-data",
+    "href": "Hantavirus_Research.html#about-the-data",
+    "title": "Hantavirus Data Analysis",
+    "section": "About the Data",
+    "text": "About the Data\nThis analysis uses Hantavirus case data published by the Centers for Disease Control and Prevention (CDC). The data was downloaded from:\nhttps://www.cdc.gov/hantavirus/data-research/cases/index.html\nThe dataset contains individual case records from before 1993 through 2023, including illness onset date, state FIPS code, and patient outcome.\n\nlibrary(tidyverse)\nlibrary(ggplot2)\nlibrary(ggthemes)\nlibrary(stringr)\nlibrary(maps)\nlibrary(lubridate)\nlibrary(forecast)\nlibrary(knitr)\n\nhantavirus_data &lt;- read.csv(\"data/HantaVirusTableData.csv\", skip = 1)\n\nstr(hantavirus_data)\n\n'data.frame':   891 obs. of  4 variables:\n $ Patient         : chr  \"1\" \"2\" \"3\" \"4\" ...\n $ IllnessOnsetDate: chr  \"Before 1993-undefined\" \"Before 1993-undefined\" \"Before 1993-undefined\" \"Before 1993-undefined\" ...\n $ StateFIPS       : int  35 38 49 6 25 38 38 20 20 6 ...\n $ Outcome         : chr  \"Alive\" \"Dead\" \"Dead\" \"Dead\" ...\n\nhead(hantavirus_data)\n\n  Patient      IllnessOnsetDate StateFIPS Outcome\n1       1 Before 1993-undefined        35   Alive\n2       2 Before 1993-undefined        38    Dead\n3       3 Before 1993-undefined        49    Dead\n4       4 Before 1993-undefined         6    Dead\n5       5 Before 1993-undefined        25   Alive\n6       6 Before 1993-undefined        38    Dead\n\ndim(hantavirus_data)\n\n[1] 891   4"
   },
   {
     "objectID": "Hantavirus_Research.html#cases-per-year",
     "href": "Hantavirus_Research.html#cases-per-year",
     "title": "Hantavirus Data Analysis",
     "section": "Cases Per Year",
-    "text": "Cases Per Year\nHantavirus is a rare but deadly disease transmitted through contact with infected rodents. This chart shows the number of confirmed cases reported in the United States from before 1993 to 2023. The spike in 1993 marks the first major outbreak in the Four Corners region of the American Southwest.\n\nlibrary(tidyverse)\nlibrary(ggplot2)\nlibrary(ggthemes)\nlibrary(stringr)\nlibrary(maps)\nlibrary(lubridate)\n\nhantavirus_data &lt;- read.csv(\"data/HantaVirusTableData.csv\", skip = 1)\n\nggplot(hantavirus_data, aes(x = factor(\n  ifelse(grepl(\"Before\", IllnessOnsetDate),\n         \"Before 1993\",\n         str_extract(IllnessOnsetDate, \"\\\\d{4}\")),\n  levels = c(\"Before 1993\", as.character(1993:2024))))) +\n  geom_bar(fill = \"steelblue\") +\n  labs(title = \"Hantavirus Cases by Year From Before 1993 to 2023\",\n       x = \"Year\", y = \"Number of Cases\") +\n  theme_minimal() +\n  theme(axis.text.x = element_text(angle = 45, hjust = 1))"
-  },
-  {
-    "objectID": "Hantavirus_Research.html#cases-per-state",
-    "href": "Hantavirus_Research.html#cases-per-state",
-    "title": "Hantavirus Data Analysis",
-    "section": "Cases Per State",
-    "text": "Cases Per State\nThis map shows the geographic distribution of Hantavirus cases across the United States. Western states, particularly New Mexico, Colorado, and California - account for the majority of reported cases, reflecting the habitat range of the deer mouse, the primary carrier of the virus.\n\nstate_fips &lt;- data.frame(\n  StateFIPS = c(\"04\",\"06\",\"08\",\"12\",\"16\",\"17\",\"18\",\"19\",\"20\",\n                \"22\",\"25\",\"26\",\"27\",\"30\",\"31\",\"32\",\"35\",\"36\",\n                \"37\",\"38\",\"40\",\"41\",\"42\",\"46\",\"48\",\"49\",\"50\",\n                \"53\",\"55\",\"56\"),\n  state = c(\"arizona\",\"california\",\"colorado\",\"florida\",\"idaho\",\n            \"illinois\",\"indiana\",\"iowa\",\"kansas\",\"louisiana\",\n            \"massachusetts\",\"michigan\",\"minnesota\",\"montana\",\n            \"nebraska\",\"nevada\",\"new mexico\",\"new york\",\n            \"north carolina\",\"north dakota\",\"oklahoma\",\"oregon\",\n            \"pennsylvania\",\"south dakota\",\"texas\",\"utah\",\"vermont\",\n            \"washington\",\"wisconsin\",\"wyoming\")\n)\n\nstate_counts &lt;- hantavirus_data %&gt;%\n  mutate(StateFIPS = sprintf(\"%02d\", as.integer(StateFIPS))) %&gt;%\n  count(StateFIPS) %&gt;%\n  left_join(state_fips, by = \"StateFIPS\")\n\nus_map &lt;- map_data(\"state\")\nmap_merged &lt;- left_join(us_map, state_counts, by = c(\"region\" = \"state\"))\n\nggplot(map_merged, aes(x = long, y = lat, group = group, fill = n)) +\n  geom_polygon(color = \"white\") +\n  scale_fill_gradient(low = \"lightblue\", high = \"darkred\", \n                      na.value = \"grey90\", name = \"Cases\") +\n  labs(title = \"Hantavirus Cases by State (1993-2023)\") +\n  theme_void()"
+    "text": "Cases Per Year\nHantavirus is a rare but deadly disease transmitted through contact with infected rodents. This chart shows the number of confirmed cases reported in the United States from before 1993 to 2023. The spike in 1993 marks the first major outbreak in the Four Corners region of the American Southwest.\n\nggplot(hantavirus_data, aes(x = factor(\n  ifelse(grepl(\"Before\", IllnessOnsetDate),\n         \"Before 1993\",\n         str_extract(IllnessOnsetDate, \"\\\\d{4}\")),\n  levels = c(\"Before 1993\", as.character(1993:2024))))) +\n  geom_bar(fill = \"steelblue\") +\n  labs(title = \"Hantavirus Cases by Year From Before 1993 to 2023\",\n       x = \"Year\", y = \"Number of Cases\") +\n  theme_minimal() +\n  theme(axis.text.x = element_text(angle = 45, hjust = 1))"
   },
   {
     "objectID": "Hantavirus_Research.html#cases-over-time",
     "href": "Hantavirus_Research.html#cases-over-time",
     "title": "Hantavirus Data Analysis",
     "section": "Cases Over Time",
-    "text": "Cases Over Time\nThis line chart shows the trend in Hantavirus cases by year, excluding pre-1993 cases which lack specific dates. It reveals how case counts have fluctuated over the decades, with notable spikes in certain years following favorable rodent population conditions.\n\n# Filter out \"Before 1993\" rows and remove rows with no date\ncases_by_year &lt;- hantavirus_data %&gt;%\n  filter(!grepl(\"Before\", IllnessOnsetDate), !is.na(IllnessOnsetDate)) %&gt;%\n  # Extract the 4-digit year from strings like \"Jul-1993\"\n  mutate(Year = as.integer(str_extract(IllnessOnsetDate, \"\\\\d{4}\"))) %&gt;%\n  # Drop any rows where year extraction failed\n  filter(!is.na(Year)) %&gt;%\n  count(Year, name = \"Cases\")\n\n# Build the line chart\nggplot(cases_by_year, aes(x = Year, y = Cases)) +\n  geom_line(color = \"red\", linewidth = 1.2) +\n  geom_point(color = \"red\", size = 3) +\n  scale_x_continuous(breaks = seq(min(cases_by_year$Year),\n                                   max(cases_by_year$Year), by = 2)) +\n  labs(title = \"Hantavirus Cases Over Time (1993–2023)\",\n       subtitle = \"Pre-1993 cases excluded due to undated records\",\n       x = \"Year\", y = \"Number of Cases\") +\n  theme_minimal() +\n  theme(\n    plot.title = element_text(face = \"bold\", size = 14),\n    # Rotate x-axis labels so they don't overlap\n    axis.text.x = element_text(angle = 45, hjust = 1),\n    panel.grid.minor = element_blank()\n  )"
+    "text": "Cases Over Time\nThis line chart shows the trend in Hantavirus cases by year, excluding pre-1993 cases which lack specific dates.\n\ncases_by_year &lt;- hantavirus_data %&gt;%\n  filter(!grepl(\"Before\", IllnessOnsetDate), !is.na(IllnessOnsetDate)) %&gt;%\n  mutate(Year = as.integer(str_extract(IllnessOnsetDate, \"\\\\d{4}\"))) %&gt;%\n  filter(!is.na(Year)) %&gt;%\n  count(Year, name = \"Cases\")\n\nggplot(cases_by_year, aes(x = Year, y = Cases)) +\n  geom_line(color = \"red\", linewidth = 1.2) +\n  geom_point(color = \"red\", size = 3) +\n  scale_x_continuous(breaks = seq(min(cases_by_year$Year),\n                                   max(cases_by_year$Year), by = 2)) +\n  labs(title = \"Hantavirus Cases Over Time (1993-2023)\",\n       subtitle = \"Pre-1993 cases excluded due to undated records\",\n       x = \"Year\", y = \"Number of Cases\") +\n  theme_minimal() +\n  theme(\n    plot.title = element_text(face = \"bold\", size = 14),\n    axis.text.x = element_text(angle = 45, hjust = 1),\n    panel.grid.minor = element_blank()\n  )"
   },
   {
-    "objectID": "Hantavirus_Research.html#top-10-sates-by-case-count",
-    "href": "Hantavirus_Research.html#top-10-sates-by-case-count",
+    "objectID": "Hantavirus_Research.html#cases-per-state",
+    "href": "Hantavirus_Research.html#cases-per-state",
     "title": "Hantavirus Data Analysis",
-    "section": "Top 10 Sates by Case Count",
-    "text": "Top 10 Sates by Case Count\nThis table shows the ten states with the highest number of reported Hantavirus cases. Western states dominate the list,reflecting the geographic range of the deer mouse, the primary carrier of the virus.\n\nlibrary(knitr)\n\n\ntop10_states &lt;- hantavirus_data %&gt;%\n  # Convert FIPS code to 2-digit string to match lookup table\n  mutate(StateFIPS = sprintf(\"%02d\", as.integer(StateFIPS))) %&gt;%\n  # Join with the state names lookup table already defined above\n  left_join(state_fips, by = \"StateFIPS\") %&gt;%\n  # Remove rows with no matching state name\n  filter(!is.na(state)) %&gt;%\n\n  count(state, name = \"Cases\") %&gt;%\n  # Sort highest to lowest and keep top 10\n  arrange(desc(Cases)) %&gt;%\n  slice(1:10) %&gt;%\n\n  mutate(state = str_to_title(state)) %&gt;%\n  rename(State = state)\n\n\nkable(top10_states, caption = \"Top 10 States by Hantavirus Case Count (1993–2023)\")\n\n\nTop 10 States by Hantavirus Case Count (1993–2023)\n\n\nState\nCases\n\n\n\n\nNew Mexico\n129\n\n\nColorado\n121\n\n\nArizona\n92\n\n\nCalifornia\n79\n\n\nWashington\n61\n\n\nTexas\n49\n\n\nUtah\n48\n\n\nMontana\n46\n\n\nNevada\n39\n\n\nOregon\n27"
+    "section": "Cases Per State",
+    "text": "Cases Per State\nThis map shows the geographic distribution of Hantavirus cases across the United States.\n\nstate_fips &lt;- data.frame(\n  StateFIPS = c(\"04\",\"06\",\"08\",\"12\",\"16\",\"17\",\"18\",\"19\",\"20\",\n                \"22\",\"25\",\"26\",\"27\",\"30\",\"31\",\"32\",\"35\",\"36\",\n                \"37\",\"38\",\"40\",\"41\",\"42\",\"46\",\"48\",\"49\",\"50\",\n                \"53\",\"55\",\"56\"),\n  state = c(\"arizona\",\"california\",\"colorado\",\"florida\",\"idaho\",\n            \"illinois\",\"indiana\",\"iowa\",\"kansas\",\"louisiana\",\n            \"massachusetts\",\"michigan\",\"minnesota\",\"montana\",\n            \"nebraska\",\"nevada\",\"new mexico\",\"new york\",\n            \"north carolina\",\"north dakota\",\"oklahoma\",\"oregon\",\n            \"pennsylvania\",\"south dakota\",\"texas\",\"utah\",\"vermont\",\n            \"washington\",\"wisconsin\",\"wyoming\")\n)\n\nstate_counts &lt;- hantavirus_data %&gt;%\n  mutate(StateFIPS = sprintf(\"%02d\", as.integer(StateFIPS))) %&gt;%\n  count(StateFIPS) %&gt;%\n  left_join(state_fips, by = \"StateFIPS\")\n\nus_map &lt;- map_data(\"state\")\nmap_merged &lt;- left_join(us_map, state_counts, by = c(\"region\" = \"state\"))\n\nggplot(map_merged, aes(x = long, y = lat, group = group, fill = n)) +\n  geom_polygon(color = \"white\") +\n  scale_fill_gradient(low = \"lightblue\", high = \"darkred\",\n                      na.value = \"grey90\", name = \"Cases\") +\n  labs(title = \"Hantavirus Cases by State (1993-2023)\") +\n  theme_void()"
+  },
+  {
+    "objectID": "Hantavirus_Research.html#hantavirus-cases-per-million-by-state",
+    "href": "Hantavirus_Research.html#hantavirus-cases-per-million-by-state",
+    "title": "Hantavirus Data Analysis",
+    "section": "Hantavirus Cases Per Million by State",
+    "text": "Hantavirus Cases Per Million by State\n\nstate_populations &lt;- data.frame(\n  state = c(\"arizona\",\"california\",\"colorado\",\"florida\",\"idaho\",\n            \"illinois\",\"indiana\",\"iowa\",\"kansas\",\"louisiana\",\n            \"massachusetts\",\"michigan\",\"minnesota\",\"montana\",\n            \"nebraska\",\"nevada\",\"new mexico\",\"new york\",\n            \"north carolina\",\"north dakota\",\"oklahoma\",\"oregon\",\n            \"pennsylvania\",\"south dakota\",\"texas\",\"utah\",\"vermont\",\n            \"washington\",\"wisconsin\",\"wyoming\"),\n  population = c(7151502, 39538223, 5773714, 21538187, 1839106,\n                 12812508, 6785528, 3190369, 2937880, 4657757,\n                 7029917, 10077331, 5706494, 1084225, 1961504,\n                 3104614, 2117522, 20201249, 10439388, 779094,\n                 3959353, 4237256, 13002700, 886667, 29145505,\n                 3271616, 643077, 7705281, 5893718, 576851)\n)\n\ncases_per_million &lt;- state_counts %&gt;%\n  left_join(state_populations, by = \"state\") %&gt;%\n  mutate(per_million = (n / population) * 1000000)\n\nmap_per_million &lt;- left_join(us_map, cases_per_million, by = c(\"region\" = \"state\"))\n\nggplot(map_per_million, aes(x = long, y = lat, group = group, fill = per_million)) +\n  geom_polygon(color = \"white\") +\n  scale_fill_gradient(low = \"lightblue\", high = \"darkred\",\n                      na.value = \"grey90\", name = \"Cases per Million\") +\n  labs(title = \"Hantavirus Cases per Million by State (1993-2023)\") +\n  theme_void()"
+  },
+  {
+    "objectID": "Hantavirus_Research.html#hantavirus-cases-over-time-by-top-5-states",
+    "href": "Hantavirus_Research.html#hantavirus-cases-over-time-by-top-5-states",
+    "title": "Hantavirus Data Analysis",
+    "section": "Hantavirus Cases Over Time by Top 5 States",
+    "text": "Hantavirus Cases Over Time by Top 5 States\n\ntop5_states &lt;- state_counts %&gt;%\n  slice_max(n, n = 5) %&gt;%\n  pull(state)\n\ntop5_data &lt;- hantavirus_data %&gt;%\n  mutate(StateFIPS = sprintf(\"%02d\", as.integer(StateFIPS))) %&gt;%\n  left_join(state_fips, by = \"StateFIPS\") %&gt;%\n  filter(state %in% top5_states) %&gt;%\n  filter(!grepl(\"Before\", IllnessOnsetDate), !is.na(IllnessOnsetDate)) %&gt;%\n  mutate(Year = as.integer(str_extract(IllnessOnsetDate, \"\\\\d{4}\"))) %&gt;%\n  filter(!is.na(Year)) %&gt;%\n  count(Year, state, name = \"Cases\")\n\nggplot(top5_data, aes(x = Year, y = Cases, color = state, group = state)) +\n  geom_line(linewidth = 1) +\n  geom_point(size = 2) +\n  scale_x_continuous(breaks = seq(1993, 2023, by = 2)) +\n  labs(title = \"Hantavirus Cases Over Time for Top 5 States\",\n       x = \"Year\", y = \"Number of Cases\", color = \"State\") +\n  theme_minimal() +\n  theme(axis.text.x = element_text(angle = 45, hjust = 1))"
+  },
+  {
+    "objectID": "Hantavirus_Research.html#hantavirus-case-predictions-2024-2030",
+    "href": "Hantavirus_Research.html#hantavirus-case-predictions-2024-2030",
+    "title": "Hantavirus Data Analysis",
+    "section": "Hantavirus Case Predictions 2024-2030",
+    "text": "Hantavirus Case Predictions 2024-2030\n\nts_data &lt;- ts(cases_by_year$Cases, start = min(cases_by_year$Year))\nfit &lt;- auto.arima(ts_data)\nfuture &lt;- forecast(fit, h = 7)\n\nforecast_df &lt;- data.frame(\n  Year = 2024:2030,\n  Cases = as.numeric(future$mean),\n  Lower = as.numeric(future$lower[, 2]),\n  Upper = as.numeric(future$upper[, 2]),\n  Type = \"Forecast\"\n)\n\nhistorical_df &lt;- cases_by_year %&gt;%\n  mutate(Type = \"Historical\")\n\nggplot() +\n  geom_line(data = historical_df,\n            aes(x = Year, y = Cases),\n            color = \"steelblue\", linewidth = 1) +\n  geom_line(data = forecast_df,\n            aes(x = Year, y = Cases),\n            color = \"red\", linewidth = 1, linetype = \"dashed\") +\n  geom_ribbon(data = forecast_df,\n              aes(x = Year, ymin = Lower, ymax = Upper),\n              fill = \"red\", alpha = 0.2) +\n  scale_x_continuous(breaks = seq(1993, 2030, by = 2)) +\n  labs(title = \"Hantavirus Cases with Forecast 2024-2030\",\n       subtitle = \"Shaded area shows 95% prediction interval\",\n       x = \"Year\", y = \"Number of Cases\") +\n  theme_minimal() +\n  theme(axis.text.x = element_text(angle = 45, hjust = 1))"
+  },
+  {
+    "objectID": "Hantavirus_Research.html#top-10-states-by-case-count",
+    "href": "Hantavirus_Research.html#top-10-states-by-case-count",
+    "title": "Hantavirus Data Analysis",
+    "section": "Top 10 States by Case Count",
+    "text": "Top 10 States by Case Count\n\ntop10_states &lt;- hantavirus_data %&gt;%\n  mutate(StateFIPS = sprintf(\"%02d\", as.integer(StateFIPS))) %&gt;%\n  left_join(state_fips, by = \"StateFIPS\") %&gt;%\n  filter(!is.na(state)) %&gt;%\n  count(state, name = \"Cases\") %&gt;%\n  arrange(desc(Cases)) %&gt;%\n  slice(1:10) %&gt;%\n  mutate(state = str_to_title(state)) %&gt;%\n  rename(State = state)\n\nkable(top10_states, caption = \"Top 10 States by Hantavirus Case Count (1993-2023)\")\n\n\nTop 10 States by Hantavirus Case Count (1993-2023)\n\n\nState\nCases\n\n\n\n\nNew Mexico\n129\n\n\nColorado\n121\n\n\nArizona\n92\n\n\nCalifornia\n79\n\n\nWashington\n61\n\n\nTexas\n49\n\n\nUtah\n48\n\n\nMontana\n46\n\n\nNevada\n39\n\n\nOregon\n27"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome!",
+    "section": "",
+    "text": "Welcome to my Hantavirus research site. This project analyzes CDC data on Hantavirus cases across the United States from before 1993 to 2023."
   }
 ]

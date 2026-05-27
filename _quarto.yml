@@ -1,7 +1,6 @@
 project:
   type: website
   output-dir: docs
-
 website:
   title: "Hantavirus Data Analysis"
   navbar:
@@ -10,7 +9,8 @@ website:
         text: Home
       - href: Hantavirus_Research.html
         text: Hantavirus
-
+      - href: resources.html
+        text: Resources
 format:
   html:
     theme: cosmo

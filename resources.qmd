@@ -1,0 +1,34 @@
+---
+title: "Resources"
+---
+
+## Data Sources
+
+- CDC Hantavirus Case Data
+  Centers for Disease Control and Prevention. (2024). Hantavirus Cases in the United States.
+  Retrieved from: https://www.cdc.gov/hantavirus/data-research/cases/index.html
+
+## About Hantavirus
+
+- CDC Hantavirus Overview
+  Centers for Disease Control and Prevention. (2024). Hantavirus.
+  Retrieved from: https://www.cdc.gov/hantavirus
+
+## Code and Analysis References
+
+- Functional Data Analysis with R
+  Crainiceanu, C.M., Goldsmith, J., Leroux, A., and Cui, E. (2024).
+  Functional Data Analysis with R. Chapman and Hall/CRC Press.
+  https://www.taylorfrancis.com/books/mono/10.1201/9781003278726/functional-data-analysis-ciprian-crainiceanu-jeff-goldsmith-andrew-leroux-erjia-cui
+
+## R Packages Used
+
+- ggplot2: https://ggplot2.tidyverse.org
+- tidyr: https://tidyr.tidyverse.org
+- stringr: https://stringr.tidyverse.org
+- dplyr: https://dplyr.tidyverse.org
+
+## Further Reading
+
+- CDC Hantavirus Transmission: https://www.cdc.gov/hantavirus/transmission
+- ProMED Hantavirus Updates: https://promedmail.org
